@@ -9,13 +9,21 @@
     <title>Account</title>
 </head>
 <h:form>
-    <h3> Create a new Account</h3>
+    <h3> Currency Converter</h3>
     <p>
-        <h:outputLabel for="holderFirstName" value="FirstName"/>
-        <h:inputText id="holderFirstName" value="#{accountManager.newAccountHolderFirstName}"/>
+        <h:outputLabel for="fromCurrency" value="From Currency"/>
+        <h:inputText id="fromCurrency" value="#{currencyManager.fromCurrencyName}"/>
     </p>
     <p>
-        <h:commandButton value="Create Account" action="#{accountManager.createAccount}"/>
+        <h:outputLabel for="toCurrencyName" value="To Currency"/>
+        <h:inputText id="toCurrencyName" value="#{currencyManager.toCurrencyName}"/>
+    </p>
+    <p>
+        <h:outputLabel for="currencyAmounttoConvert" value="Amount to Convert"/>
+        <h:inputText id="currencyAmounttoConvert" value="#{currencyManager.amounttoConvert}"/>
+    </p>
+    <p>
+        <h:commandButton value="Convert" action="#{currencyManager.convert}"/>
     </p>
 </h:form>
 </html>
