@@ -1,9 +1,7 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.xml.soap.Name;
 import java.io.Serializable;
 
 /**
@@ -13,8 +11,12 @@ import java.io.Serializable;
 public class Currency implements CurrencyDTO,Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "currency_id",length = 50)
     private int acctNo;
+
+    @Column(name = "currency_name",length = 50)
     private String currencyName;
+    @Column(name = "currency_rate",length = 50)
     private double currencyrate;
 
     public Currency(){    }

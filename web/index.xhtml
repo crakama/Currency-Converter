@@ -6,30 +6,61 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Conpatible" content="IE=edge" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
     <title>Account</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 </head>
-<h:form>
-    <p>
-        <h:outputLabel for="targetAmountid" rendered="#{currencyManager.targetAmount != null}"  value="Converted Amount: "/>
-        <h:outputText id="targetAmountid" value="#{currencyManager.targetAmount} "/>
-    </p>
+<body>
+<div class="container">
+<div class="navbar navbar-inverse">
+    <div class="navbar-brand">
+        <h3> Currency Converter</h3>
+    </div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<h:form styleClass="form-horizontal">
+
+    <div>
+        <h:outputLabel for="targetAmountid" rendered="#{currencyManager.targetAmount != null}"  value="Converted Amount: " styleClass="control-label col-sm-2"/>
+        <div class="col-sm-10">
+            <h:inputText id="targetAmountid" value="#{currencyManager.targetAmount} " styleClass="form-control"/>
+        </div>
+    </div>
+
     <hr/>
 
-    <h3> Currency Converter</h3>
-    <p>
-        <h:outputLabel for="fromCurrency" value="From Currency"/>
-        <h:inputText id="fromCurrency" value="#{currencyManager.fromCurrencyName}"/>
-    </p>
-    <p>
-        <h:outputLabel for="toCurrencyName" value="To Currency"/>
-        <h:inputText id="toCurrencyName" value="#{currencyManager.toCurrencyName}"/>
-    </p>
-    <p>
-        <h:outputLabel for="currencyAmounttoConvert" value="Amount to Convert"/>
-        <h:inputText id="currencyAmounttoConvert" value="#{currencyManager.amounttoConvert}"/>
-    </p>
-    <p>
-        <h:commandButton value="Convert" action="#{currencyManager.convert}"/>
-    </p>
+    <div>
+        <h:outputLabel for="fromCurrency" value="From Currency" styleClass="control-label col-sm-2"/>
+        <div class="col-sm-10">
+        <h:inputText id="fromCurrency" value="#{currencyManager.fromCurrencyName}" styleClass="form-control"/>
+        </div>
+    </div>
+
+    <div>
+        <h:outputLabel for="toCurrencyName" value="To Currency" styleClass="control-label col-sm-2"/>
+        <div class="col-sm-10">
+            <h:inputText id="toCurrencyName" value="#{currencyManager.toCurrencyName}" styleClass="form-control"/>
+        </div>
+    </div>
+
+    <div>
+        <h:outputLabel for="currencyAmounttoConvert" value="Amount to Convert" styleClass="control-label col-sm-2"/>
+        <div class="col-sm-10">
+            <h:inputText id="currencyAmounttoConvert" value="#{currencyManager.amounttoConvert}" styleClass="form-control"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <h:commandButton value="Convert" action="#{currencyManager.convert}" styleClass="btn-outline-primary"/>
+    </div>
+    </div>
 </h:form>
+</div>
+</div>
+</div>
+</body>
 </html>
