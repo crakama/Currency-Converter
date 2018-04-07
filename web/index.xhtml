@@ -9,6 +9,12 @@
     <title>Account</title>
 </head>
 <h:form>
+    <p>
+        <h:outputLabel for="targetAmountid" rendered="#{currencyManager.targetAmount != null}"  value="Converted Amount: "/>
+        <h:outputText id="targetAmountid" value="#{currencyManager.targetAmount} "/>
+    </p>
+    <hr/>
+
     <h3> Currency Converter</h3>
     <p>
         <h:outputLabel for="fromCurrency" value="From Currency"/>

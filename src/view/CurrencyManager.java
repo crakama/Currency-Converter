@@ -23,9 +23,11 @@ public class CurrencyManager implements Serializable {
     private double amounttoConvert;
     private String toCurrencyName;
     private String fromCurrencyName;
-
+    private double targetAmount;
     @Inject
     Conversation conContext;
+
+
     /**
      * @param amounttoConvert
      */
@@ -61,17 +63,21 @@ public class CurrencyManager implements Serializable {
 
     public void convert(){
         createConversionRates();
-        //currencyDTO = currencyFacade.convertCurrency(amounttoConvert,fromCurrencyName,toCurrencyName);
-        currencyFacade.convertCurrency(amounttoConvert,fromCurrencyName,toCurrencyName);
+        double CoversionResult = currencyFacade.convertCurrency(amounttoConvert,fromCurrencyName,toCurrencyName);
+        setTargetAmount(CoversionResult);
     }
-
+    private void setTargetAmount(double coversionResult) {
+        this.targetAmount = coversionResult;
+    }
+    public double getTargetAmount() {
+        return targetAmount;
+    }
     public void createConversionRates(){
         startConversation();
         Currency[] currencies = {new Currency("USD",1.0),
                                   new Currency("EUR",0.0738)};
         currencyFacade.createConversionRates(currencies);
     }
-
     private void startConversation() {
         if(conContext.isTransient()){
             conContext.begin();

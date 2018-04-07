@@ -21,9 +21,9 @@ public class CurrencyFacade {
             currencyDAO.storeConversionRate(currency);
         }
     }
-
-    public void convertCurrency(double amounttoConvert, String fromCurrencyName, String toCurrencyName) {
-        currencyDAO.convert(amounttoConvert, fromCurrencyName,toCurrencyName);
+    public double convertCurrency(double amounttoConvert, String fromCurrencyName, String toCurrencyName) {
+        double targetAmount = currencyDAO.convert(amounttoConvert, fromCurrencyName,toCurrencyName);
+        return targetAmount;
     }
 
 }

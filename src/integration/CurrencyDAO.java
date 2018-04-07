@@ -19,6 +19,8 @@ import java.util.List;
 public class CurrencyDAO {
     @PersistenceContext(unitName = "bankPersistenceUnit")
     private EntityManager em;
+    private double rateOfTargetToDollars;
+    private double rateOfSourceToDollars;
     public void storeConversionRate(Currency currency) {
         em.persist(currency);
     }
@@ -29,9 +31,18 @@ public class CurrencyDAO {
         return currencyList;
     }
 
-    public void convert(double amounttoConvert, String fromCurrency, String toCurrency) {
+    public double convert(double amounttoConvert, String nameOfFromCurrency, String nameOfToCurrency) {
 
-        System.out.println("amounttoConvert"+amounttoConvert+"fromCurrency"+fromCurrency+"toCurrency"+toCurrency);
+        for(Currency currency: getCurrencies()){
+            if(currency.getcurrencyName().equalsIgnoreCase(nameOfFromCurrency)){
+                rateOfSourceToDollars = currency.getCurrencyRate();
+            }
+            if (currency.getcurrencyName().equalsIgnoreCase(nameOfToCurrency)){
+                rateOfTargetToDollars = currency.getCurrencyRate();
+            }
+        }
+        double targetAmount = (amounttoConvert / rateOfSourceToDollars) * rateOfTargetToDollars;
 
+        return targetAmount;
     }
 }
