@@ -13,4 +13,12 @@ A small web application using Java EE server side technology, MySQL database and
    #####
    Images of Results
    
-     ![Image One](https://github.com/crakama/Currency-Converter/blob/master/images/BeforeConvert.PNG)
+ ![Image One](https://github.com/crakama/Currency-Converter/blob/master/images/BeforeConvert.PNG)
+  
+ ![Image Two](https://github.com/crakama/Currency-Converter/blob/master/images/AfterConversion.PNG)
+   
+ ![Image Three](https://github.com/crakama/Currency-Converter/blob/master/images/USDtoSEK.PNG)
+
+ ![Image Four](https://github.com/crakama/Currency-Converter/blob/master/images/USDtoSEK2.PNG)
+ 
+ ![Image Five](https://github.com/crakama/Currency-Converter/blob/master/images/Database.PNG)
