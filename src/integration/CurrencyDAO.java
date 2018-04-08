@@ -21,8 +21,15 @@ public class CurrencyDAO {
     private EntityManager em;
     private double rateOfTargetToDollars;
     private double rateOfSourceToDollars;
-    public void storeConversionRate(Currency currency) {
-        em.persist(currency);
+    public void storeConversionRate(Currency[] currencies) {
+
+        for(Currency curr: currencies){
+            Currency currency = em.find(Currency.class,curr.getId());
+            if(currency == null){
+                em.persist(curr);
+            }
+
+        }
     }
 
     public List<Currency> getCurrencies() {
@@ -32,7 +39,6 @@ public class CurrencyDAO {
     }
 
     public double convert(double amounttoConvert, String nameOfFromCurrency, String nameOfToCurrency) {
-
         for(Currency currency: getCurrencies()){
             if(currency.getcurrencyName().equalsIgnoreCase(nameOfFromCurrency)){
                 rateOfSourceToDollars = currency.getCurrencyRate();
@@ -41,8 +47,9 @@ public class CurrencyDAO {
                 rateOfTargetToDollars = currency.getCurrencyRate();
             }
         }
-        double targetAmount = (amounttoConvert / rateOfSourceToDollars) * rateOfTargetToDollars;
 
+
+        double targetAmount = (amounttoConvert / rateOfSourceToDollars) * rateOfTargetToDollars;
         return targetAmount;
     }
 }

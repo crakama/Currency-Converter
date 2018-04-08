@@ -12,7 +12,7 @@ public class Currency implements CurrencyDTO,Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "currency_id",length = 50)
-    private int acctNo;
+    private int currencyNo;
 
     @Column(name = "currency_name",length = 50)
     private String currencyName;
@@ -37,4 +37,27 @@ public class Currency implements CurrencyDTO,Serializable {
         return currencyrate;
     }
 
+    @Override
+    public int getId() {
+        return currencyNo;
+    }
+
+    /**
+     * hashCode and equals
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        return new Integer(currencyNo).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Currency)) {
+            return false;
+        }
+        Currency other = (Currency) object;
+        return this.currencyNo == other.currencyNo;
+    }
 }

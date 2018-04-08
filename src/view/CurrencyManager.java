@@ -3,12 +3,17 @@ package view;
 import controller.CurrencyFacade;
 import model.Currency;
 import model.CurrencyDTO;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * JSF Managed Bean,POJO class that coordinates operations JSF and read property values of JSF
@@ -24,10 +29,24 @@ public class CurrencyManager implements Serializable {
     private String toCurrencyName;
     private String fromCurrencyName;
     private double targetAmount;
+    private Map<String, String> listCurrencies;
     @Inject
     Conversation conContext;
 
 
+    @PostConstruct
+    public void initCurrency() {
+        createConversionRates();
+        listCurrencies = currencyFacade.listAllCurrencies();
+    }
+
+    public Map<String, String> getListCurrencies() {
+        return listCurrencies;
+    }
+
+    public void setListCurrencies(Map<String, String> currencies) {
+        this.listCurrencies = currencies;
+    }
     /**
      * @param amounttoConvert
      */
@@ -44,9 +63,7 @@ public class CurrencyManager implements Serializable {
     public void setFromCurrencyName(String fromCurrencyName) {
         this.fromCurrencyName = fromCurrencyName;
     }
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
+
     public String getFromCurrencyName() {
         return null;
     }
@@ -54,17 +71,14 @@ public class CurrencyManager implements Serializable {
     public void setToCurrencyName(String toCurrencyName) {
         this.toCurrencyName = toCurrencyName;
     }
-    /**
-     * Never used but JSF does not support write-only properties.
-     */
+
     public String getToCurrencyName() {
         return null;
     }
 
     public void convert(){
-        createConversionRates();
-        double CoversionResult = currencyFacade.convertCurrency(amounttoConvert,fromCurrencyName,toCurrencyName);
-        setTargetAmount(CoversionResult);
+        double coversionResult = currencyFacade.convertCurrency(amounttoConvert,fromCurrencyName,toCurrencyName);
+        setTargetAmount(coversionResult);
     }
     private void setTargetAmount(double coversionResult) {
         this.targetAmount = coversionResult;
@@ -74,13 +88,22 @@ public class CurrencyManager implements Serializable {
     }
     public void createConversionRates(){
         startConversation();
-        Currency[] currencies = {new Currency("USD",1.0),
-                                  new Currency("EUR",0.0738)};
-        currencyFacade.createConversionRates(currencies);
+
+        Currency[] currencies = {new Currency("US Dollar",1.0),
+                                new Currency("Euro",0.81),
+                                new Currency("Swedish Kronor",8.39),
+                                new Currency("Kenyan Shilling",101.00),
+                                new Currency("Pakistani Rupee",115.50)};
+        currencyFacade.createCorrencyRates(currencies);
     }
     private void startConversation() {
         if(conContext.isTransient()){
             conContext.begin();
+        }
+    }
+    private void stopConversation() {
+        if (!conContext.isTransient()) {
+            conContext.end();
         }
     }
 }
