@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://java.sun.com/jsf/html">
+<head>
+    <title>Account</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+</head>
+<body >
+<div class="container">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-brand">
+            <h3> Currency Converter</h3>
+        </div>
+    </div>
+    <hr/>
+    <div class="row" style="">
+        <div class="col-xs-12">
+            <h:form styleClass="form-horizontal ">
+                <div class="form-group">
+                <div>
+                    <h:outputLabel for="targetAmountid" rendered="#{currencyManager.targetAmount != null}"  value="Converted Amount: " styleClass="control-label"/>
+                    <div class="">
+                        <h:outputText id="targetAmountid" value="#{currencyManager.targetAmount} " styleClass="form-control "/>
+                    </div>
+                </div>
+
+                    <h:outputLabel for="fromCurrency" value="" styleClass="control-label " class="col-sm-10"/>
+                    <div  style="float: left">
+                        <h:selectOneMenu  id="fromCurrency" value="#{currencyManager.fromCurrencyName}" styleClass="form-control">
+                            <f:selectItem itemLabel="From Currency" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{currencyManager.listCurrencies}" />
+                        </h:selectOneMenu >
+                    </div>
+
+                    <div  style="float: right " >
+                        <h:selectOneMenu id="toCurrencyName" value="#{currencyManager.toCurrencyName}" styleClass="form-control">
+                            <f:selectItem itemLabel="To Currency" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{currencyManager.listCurrencies}" />
+                        </h:selectOneMenu>
+                    </div>
+                <div></div><div><p></p></div>
+                    <h:outputLabel style="float: left" for="currencyAmounttoConvert" value="Amount to Convert" />
+                    <div style="float: contour">
+                        <h:inputText id="currencyAmounttoConvert" value="#{currencyManager.amounttoConvert}" styleClass="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <h:commandButton value="Convert" action="#{currencyManager.convert}" styleClass="btn-default"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
